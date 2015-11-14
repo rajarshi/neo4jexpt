@@ -1,10 +1,12 @@
 package net.rguha.apps.neo4j;
 
 import org.neo4j.graphdb.*;
+import org.neo4j.graphdb.factory.GraphDatabaseBuilder;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.index.IndexHits;
 
+import java.io.File;
 import java.sql.*;
 
 /**
@@ -157,7 +159,15 @@ public class ChemblTargetLoader {
                 "        AND cc.component_id = cs.component_id " +
                 "        AND pfc.protein_class_id = cc.protein_class_id ");
         ResultSet rset = pst.executeQuery();
-        GraphDatabaseService gdb = new GraphDatabaseFactory().newEmbeddedDatabase(args[0]);
+
+        File dbDir = new File(args[0]);
+        if (dbDir.exists()) {
+            System.out.println(dbDir+" already exists. Won't overwrite, so exiting");
+            System.exit(-1);
+        }
+
+        GraphDatabaseBuilder builder = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(dbDir);
+        GraphDatabaseService gdb = builder.newGraphDatabase();
         try (Transaction tx = gdb.beginTx()) {
             ChemblTargetLoader loader = new ChemblTargetLoader(gdb);
             loader.loadFromDb(rset);
