@@ -22,6 +22,6 @@ overwrite and exit. In addition you'll need to specify the JDBC URL for the data
 java -Djdbc.url="jdbc:mysql://host.name/chembl_20?user=USER&password=PASS"  -jar target/neo4j-ctl-1.0-SNAPSHOT.jar graph.db
 ```
 
-You can then start up the Neo4j application and explore the graph db using the [Cypher](http://neo4j.com/developer/cypher-query-language/)
-query language.
+You can then start up the Neo4j application and explore the graph db in your browser using the
+[Cypher](http://neo4j.com/developer/cypher-query-language/) query language, as shown in the screen shot.
 ![CypherQuery](imgs/img1.png)
