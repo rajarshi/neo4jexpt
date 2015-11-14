@@ -24,3 +24,4 @@ java -Djdbc.url="jdbc:mysql://host.name/chembl_20?user=USER&password=PASS"  -jar
 
 You can then start up the Neo4j application and explore the graph db using the [Cypher](http://neo4j.com/developer/cypher-query-language/)
 query language.
+![CypherQuery](imgs/img1.png)
